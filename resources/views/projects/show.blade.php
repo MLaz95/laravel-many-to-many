@@ -6,7 +6,12 @@
     <img src="{{asset('storage/' . $project->cover)}}" alt="">
     <div>
         <h2>{{$project->name}}</h2>
-        <small>{{$project->type?->title}}</small>
+        <h4 class="text-capitalize text-secondary">{{$project->type?->title}}</h4 class="text-capitalize">
+        <div class="d-flex gap-2 mb-5">
+            @foreach($project->technologies as $tech)
+            <span class="badge rounded-pill" style="background-color: {{ $tech->color }}">{{ $tech->title }}</span>
+            @endforeach
+        </div>
         <p>{{$project->description}}</p>
         <div>{{$project->tech}}</div>
         <div>{{$project->github}}</div>
