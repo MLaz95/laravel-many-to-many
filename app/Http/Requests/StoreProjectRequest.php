@@ -26,13 +26,9 @@ class StoreProjectRequest extends FormRequest
             'description' => 'required',
             'cover' => 'file|nullable|mimes:jpg,bmp,png',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id',
             'github' => 'required',
         ];
     }
 
-    // public function messages(): array {
-    //     return[
-    //         ''
-    //     ];
-    // }
 }
