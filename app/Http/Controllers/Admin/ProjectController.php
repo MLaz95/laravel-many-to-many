@@ -70,7 +70,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -83,8 +84,10 @@ class ProjectController extends Controller
             $path = Storage::disk('public')->put('cover_images', $request->cover);
             $project->cover = $path;
         }
-        $project->fill($request->all());
-        $project->save();
+        $project->update($request->all());
+
+        // sync() looks at all the ids I'm trying to add to the pivot table, adds those, and removes any others
+        $project->technologies()->sync($request->technologies);
         return redirect(route('projects.index'));
     }
 

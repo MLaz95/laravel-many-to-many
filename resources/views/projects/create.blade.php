@@ -33,6 +33,7 @@
                 </div>
             @enderror
         </div>
+
         <div class="mb-3">
             <label for="technology" class="form-label text-capitalize">technologies</label>
             <div class="d-flex gap-4">
@@ -55,10 +56,9 @@
 
                     </div>
                 @endforeach
-                
-
             </div>
         </div>
+        
         <div class="mb-3">
             <label for="type_id" class="form-label text-capitalize">type</label>
             <select class="form-control" name="type_id">
