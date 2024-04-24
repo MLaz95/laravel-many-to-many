@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name', 200);
             $table->text('description');
             $table->text('cover')->nullable();
-            $table->string('tech', 200);
             $table->text('github');
             $table->timestamps();
         });
