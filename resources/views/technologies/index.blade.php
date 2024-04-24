@@ -1,24 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>All Categories</h1>
-
-    <table class="table table-striped table-hover">
+    <table class="table">
         <thead>
-            <tr class="text-capitalize">
-                <th scope="col">id</th>
-                <th scope="col">title</th>
-                <th scope="col">buttons</th>
+            <tr>
+                <th scope="col text-capitalize">id</th>
+                <th scope="col text-capitalize">title</th>
+                <th scope="col text-capitalize">color</th>
+                <th scope="col text-capitalize">buttons</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($types as $type)
+            @foreach ($technologies as $tech)
                 <tr>
-                    <th scope="row">{{ $type->id }}</th>
-                    <td class="text-capitalize">{{ $type->title }}</td>
+                    <th scope="row">{{ $tech->id }}</th>
+                    <td>{{ $tech->title }}</td>
+                    <td>{{ $tech->color }}</td>
                     <td>
                         <div class="h-100 d-flex gap-3">
-                            <a href="{{ route('types.edit', $type->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('technologies.edit', $tech->id) }}" class="btn btn-warning">Edit</a>
                             <button class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal">Delete</button>
                         </div>
@@ -27,7 +27,7 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('types.create') }}" class="btn btn-primary">Add a new Type</a>
+    <a href="{{ route('technologies.create') }}" class="btn btn-primary">Add a new Tech</a>
     <a href="{{ route('projects.index') }}" class="btn btn-secondary">Back</a>
 
 
@@ -36,14 +36,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Are you sure you wish to remove this category?</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Are you sure you wish to delete this tech? It will be removed from any project it's assigned to</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go
                         Back</button>
 
-                    <form action="{{ route('types.destroy', $type->id) }}" method="POST">
+                    <form action="{{ route('technologies.destroy', $tech->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
 
