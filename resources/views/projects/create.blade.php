@@ -34,14 +34,30 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="tech" class="form-label text-capitalize">tech</label>
-            <input type="text" class="form-control @error('tech') is-invalid @enderror" value="{{ old('tech') }}"
-                name="tech">
-            @error('tech')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+            <label for="technology" class="form-label text-capitalize">technologies</label>
+            <div class="d-flex gap-4">
+                {{-- make a checkbox for each tech on the list --}}
+                @foreach($technologies as $tech)
+                    <div class="form-check">
+                        <input
+                            type="checkbox"
+                            class="form-check-input"
+                            {{-- all selected boxes add their values to the same array --}}
+                            name="technologies[]"
+                            {{-- value matches the id from the technologies table --}}
+                            value="{{ $tech->id }}"
+                            id="tech-{{ $tech->id }}"
+                            {{-- this is to retain selected boxes when validation fails --}}
+                            {{-- it assigns 'checked' to boxes with id contained in old('technologies'), leaves all blank if old('technologies') doesn't exist--}}
+                            {{in_array($tech->id, old('technologies', [])) ? 'checked' : ''}}
+                        >
+                        <label for="tech-{{ $tech->id }}" class="form-label text-capitalize">{{ $tech->title }}</label>
+
+                    </div>
+                @endforeach
+                
+
+            </div>
         </div>
         <div class="mb-3">
             <label for="type_id" class="form-label text-capitalize">type</label>

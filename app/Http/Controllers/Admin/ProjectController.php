@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 USE App\Http\Requests\StoreProjectRequest;
+use App\Models\Technology;
 use App\Models\Type;
 
 class ProjectController extends Controller
@@ -28,7 +29,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -46,6 +48,11 @@ class ProjectController extends Controller
 
         $newProject->fill($request->all());
         $newProject->save();
+
+        // we are attaching the project id to the tech id and adding that pair to the pivot table
+        // this HAS to happen AFTER save() because otherwise the id for the new project doesn't exist
+        $newProject->technologies()->attach($request->technologies);
+
         return redirect(route('projects.index'));
     }
 
