@@ -36,13 +36,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Are you sure you wish to delete this tech? It will be removed from any project it's assigned to</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Are you sure you wish to delete {{ $tech->title }}?
+                        It will be removed from any project it's assigned to</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go
-                        Back</button>
-
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go Back</button>
                     <form action="{{ route('technologies.destroy', $tech->id) }}" method="POST">
                         @csrf
                         @method('DELETE')

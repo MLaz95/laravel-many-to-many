@@ -22,7 +22,8 @@ class StoreTechnologyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|max:50',
+            'color' => 'nullable|max:7',
         ];
     }
 }

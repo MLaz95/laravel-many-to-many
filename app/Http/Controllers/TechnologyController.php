@@ -30,6 +30,7 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
+        $request->validated();
         $newTechnology = new Technology();
         $newTechnology->fill($request->all());
         $newTechnology->save();
@@ -57,6 +58,7 @@ class TechnologyController extends Controller
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
+        $request->validated();
         $technology->update($request->all());
         return redirect(route('technologies.index'));
     }
