@@ -19,8 +19,6 @@
                     <td>
                         <div class="h-100 d-flex gap-3">
                             <a href="{{ route('technologies.edit', $tech->id) }}" class="btn btn-warning">Edit</a>
-                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">Delete</button>
                         </div>
                     </td>
                 </tr>
